@@ -8,8 +8,13 @@ directories, app bundles and a custom desktop environment.
   `/Users`, `/Volumes`) added as symlinks over the standard FHS root, so
   normal Arch packages and pacman keep working unmodified.
 - **macOS app bundles.** Apps are bundles:
-  `MyApp.app/Contents/{Info.json, Resources/, lynxOS/MyApp}` (see
-  `scripts/apply-skel.sh` in `rootFSBuilder/`).
+  `MyApp.app/Contents/{Info.json, Resources/, lynxOS/MyApp}` — built with
+  [`AppBuilder`](https://github.com/lynxOSX/AppBuilder) (TOML project config
+  compiled into the bundle's JSON manifest).
+- **Qt for app GUIs.** WindowServerWM is a window manager, not a toolkit —
+  it draws window chrome (the macOS X title bar), apps draw their own
+  content. **Every app should use Qt** (Qt 6, Widgets) as its GUI toolkit;
+  the custom desktop components (SystemUIServer, Finder, Dock) use it too.
 - **X11, [WindowServerWM](https://github.com/lynxOSX/WindowServerWM)** —
   the window manager, an openbox fork; the openbox preferences window
   should be removed and the theme location hard-coded (not decided yet).
@@ -26,6 +31,7 @@ directories, app bundles and a custom desktop environment.
 | [`rootFSBuilder/`](https://github.com/lynxOSX/rootFSBuilder) | builds the lynxOS rootfs (proot + pacman into a tarball — see its README) |
 | [`WindowServerWM/`](https://github.com/lynxOSX/WindowServerWM) | the window manager — openbox fork rendering the macOS X title bar |
 | [BootPanel](https://github.com/lynxOSX/BootPanel) | the boot panel — plymouth-like KMS/DRM (or legacy fbdev) splash: `#BFBFBF`, logo centered, spinner 185 px below center |
+| [`AppBuilder/`](https://github.com/lynxOSX/AppBuilder) | builds app bundles from source — TOML config compiled into the bundle's `Info.json` |
 | (future) | SystemUIServer, Finder, Dock, an installer |
 
 ## Building the root filesystem
