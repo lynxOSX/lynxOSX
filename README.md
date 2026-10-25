@@ -1,13 +1,49 @@
-# lynxOS - macOS-like linux distro with custom components
+# lynxOS
 
-- uses arch linux for the base, with macos directories (/System, /Library, /Applications, /Users, /Volumes)
-- uses macos like app bundles (ex. MyApp.app/Contents/{Info.json,Resources/,lynxOS/MyApp})
-- uses x11, custom desktop enviroment with a custom panel (SystemUIServer), a file manager that both manages the desktop and the fimemanager windows (Finder), and a dock (Dock)
-- a window manager based on openbox, should remvoe the openbox preferences window, hardcode the theme location to somewhere specific (not sure yet)
-- N/A, add more features soom
+A macOS-like Linux distribution: an Arch Linux base with macOS-style
+directories, app bundles and a custom desktop environment.
 
+- **Arch base, macOS directories.** Uses Arch Linux under the hood, with
+  macOS top-level directories (`/System`, `/Library`, `/Applications`,
+  `/Users`, `/Volumes`) added as symlinks over the standard FHS root, so
+  normal Arch packages and pacman keep working unmodified.
+- **macOS app bundles.** Apps are bundles:
+  `MyApp.app/Contents/{Info.json, Resources/, lynxOS/MyApp}` (see
+  `scripts/apply-skel.sh` in `rootFSBuilder/`).
+- **X11, openbox-based WM.** The window manager is based on openbox; the
+  openbox preferences window should be removed and the theme location
+  hard-coded (location not decided yet).
+- **Custom desktop environment**, written from scratch:
+  - **SystemUIServer** — the panel/menu bar
+  - **Finder** — file manager, and it also manages the desktop
+  - **Dock** — the macOS dock
+- More components/features — to be added.
+
+## Repository layout
+
+| | |
+|---|---|
+| `rootFSBuilder/` | builds the lynxOS rootfs (proot + pacman into a tarball — see its README) |
+| [BootPanel](https://github.com/lynxOSX/BootPanel) | the boot panel — plymouth-like KMS/DRM (or legacy fbdev) splash: `#BFBFBF`, logo centered, spinner 185 px below center |
+| (future) | SystemUIServer, Finder, Dock, the WM, an installer |
+
+## Building the root filesystem
+
+```sh
+cd rootFSBuilder
+./lynx-build all      # fetch → rootfs → install → bundle
+```
+
+Produces `out/lynxos-rootfs-<date>-x86_64.tar.gz`. Host requirements are
+proot, zstd, curl, GNU tar, gzip, coreutils — no root, no VM, and the host
+distro doesn't matter (developed on Alpine). See `rootFSBuilder/README.md`.
 
 ## TO-DO
-- [ ] make custom rootfs builder
-- [ ] start working on said custom programs
-... more
+
+- [x] make custom rootfs builder
+- [x] boot panel (plymouth-alike) — [BootPanel](https://github.com/lynxOSX/BootPanel)
+- [ ] start working on said custom programs (SystemUIServer, Finder, Dock)
+- [ ] boot panel: started by an early boot stage in the rootfs, stopped when SystemUIServer is up
+- [ ] build an installer / bootable image from the rootfs tarball
+- [ ] openbox: remove preferences window, hard-code theme location
+- ... more
