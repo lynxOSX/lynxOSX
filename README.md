@@ -10,9 +10,9 @@ directories, app bundles and a custom desktop environment.
 - **macOS app bundles.** Apps are bundles:
   `MyApp.app/Contents/{Info.json, Resources/, lynxOS/MyApp}` (see
   `scripts/apply-skel.sh` in `rootFSBuilder/`).
-- **X11, openbox-based WM.** The window manager is based on openbox; the
-  openbox preferences window should be removed and the theme location
-  hard-coded (location not decided yet).
+- **X11, [WindowServerWM](https://github.com/lynxOSX/WindowServerWM)** —
+  the window manager, an openbox fork; the openbox preferences window
+  should be removed and the theme location hard-coded (not decided yet).
 - **Custom desktop environment**, written from scratch:
   - **SystemUIServer** — the panel/menu bar
   - **Finder** — file manager, and it also manages the desktop
@@ -23,9 +23,10 @@ directories, app bundles and a custom desktop environment.
 
 | | |
 |---|---|
-| `rootFSBuilder/` | builds the lynxOS rootfs (proot + pacman into a tarball — see its README) |
+| [`rootFSBuilder/`](https://github.com/lynxOSX/rootFSBuilder) | builds the lynxOS rootfs (proot + pacman into a tarball — see its README) |
+| [`WindowServerWM/`](https://github.com/lynxOSX/WindowServerWM) | the window manager — openbox fork rendering the macOS X title bar |
 | [BootPanel](https://github.com/lynxOSX/BootPanel) | the boot panel — plymouth-like KMS/DRM (or legacy fbdev) splash: `#BFBFBF`, logo centered, spinner 185 px below center |
-| (future) | SystemUIServer, Finder, Dock, the WM, an installer |
+| (future) | SystemUIServer, Finder, Dock, an installer |
 
 ## Building the root filesystem
 
