@@ -28,29 +28,17 @@ directories, app bundles and a custom desktop environment.
 
 | | |
 |---|---|
-| [`rootFSBuilder/`](https://github.com/lynxOSX/rootFSBuilder) | builds the lynxOS rootfs (proot + pacman into a tarball — see its README) |
-| [`WindowServerWM/`](https://github.com/lynxOSX/WindowServerWM) | the window manager — openbox fork rendering the macOS X title bar |
-| [BootPanel](https://github.com/lynxOSX/BootPanel) | the boot panel — plymouth-like KMS/DRM (or legacy fbdev) splash: `#BFBFBF`, logo centered, spinner 185 px below center |
-| [`AppBuilder/`](https://github.com/lynxOSX/AppBuilder) | builds app bundles from source — TOML config compiled into the bundle's `Info.json` |
+| [`rootFSBuilder`](https://github.com/lynxOSX/rootFSBuilder) | builds the lynxOS rootfs |
+| [`WindowServerWM`](https://github.com/lynxOSX/WindowServerWM) | openbox fork rendering the macOS X title bar |
+| [`BootPanel`](https://github.com/lynxOSX/BootPanel) | plymouth-like KMS/DRM (or legacy fbdev) |
+| [`AppBuilder`](https://github.com/lynxOSX/AppBuilder) | builds app bundles from source |
 | (future) | SystemUIServer, Finder, Dock, an installer |
-
-## Building the root filesystem
-
-```sh
-cd rootFSBuilder
-./lynx-build all      # fetch → rootfs → install → bundle
-```
-
-Produces `out/lynxos-rootfs-<date>-x86_64.tar.gz`. Host requirements are
-proot, zstd, curl, GNU tar, gzip, coreutils — no root, no VM, and the host
-distro doesn't matter (developed on Alpine). See `rootFSBuilder/README.md`.
 
 ## TO-DO
 
 - [x] make custom rootfs builder
-- [x] boot panel (plymouth-alike) — [BootPanel](https://github.com/lynxOSX/BootPanel)
+- [x] boot panel (plymouth-alike) - [BootPanel](https://github.com/lynxOSX/BootPanel)
+- [x] window manager based on openbox - [WindowServerWM](https://github.com/lynxOSX/WindowServerWM)
 - [ ] start working on said custom programs (SystemUIServer, Finder, Dock)
-- [ ] boot panel: started by an early boot stage in the rootfs, stopped when SystemUIServer is up
 - [ ] build an installer / bootable image from the rootfs tarball
-- [ ] openbox: remove preferences window, hard-code theme location
 - ... more
