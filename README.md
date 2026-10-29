@@ -13,8 +13,10 @@ directories, app bundles and a custom desktop environment.
   compiled into the bundle's JSON manifest).
 - **Qt for app GUIs.** WindowServerWM is a window manager, not a toolkit —
   it draws window chrome (the macOS X title bar), apps draw their own
-  content. **Every app should use Qt** (Qt 6, Widgets) as its GUI toolkit;
-  the custom desktop components (SystemUIServer, Finder, Dock) use it too.
+  content. **Every app should use Qt** (Qt 6, Widgets) as its GUI toolkit,
+  wrapped in [`AppKit`](https://github.com/lynxOSX/AppKit) (the
+  10.6-SDK-style naming — `NSApplication`, `NSWindow`, `NSMenu`); the
+  custom desktop components (SystemUIServer, Finder, Dock) use it too.
 - **X11, [WindowServerWM](https://github.com/lynxOSX/WindowServerWM)** —
   the window manager, an openbox fork; the openbox preferences window
   should be removed and the theme location hard-coded (not decided yet).
@@ -32,7 +34,8 @@ directories, app bundles and a custom desktop environment.
 | [`WindowServerWM`](https://github.com/lynxOSX/WindowServerWM) | openbox fork rendering the macOS X title bar |
 | [`BootPanel`](https://github.com/lynxOSX/BootPanel) | plymouth-like KMS/DRM (or legacy fbdev) |
 | [`AppBuilder`](https://github.com/lynxOSX/AppBuilder) | builds app bundles from source |
-| (future) | SystemUIServer, Finder, Dock, an installer |
+| [`SystemUIServer`](https://github.com/lynxOSX/SystemUIServer) | the menu bar: Apple menu, global app menu, menu extras (`.menu` bundles) |
+| (future) | Finder, Dock, an installer |
 
 ## TO-DO
 
